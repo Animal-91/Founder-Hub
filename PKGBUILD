@@ -5,12 +5,7 @@ pkgdesc="Google Antigravity is an agentic development platform, evolving the IDE
 arch=('x86_64')
 url="https://antigravity.google/"
 license=('custom')
-
-depends=('gtk3' 'nss' 'alsa-lib' 'libxss' 'libxtst' 'xdg-utils' 'libdrm' 'mesa')
-
-provides=('antigravity')
-conflicts=('antigravity')
-
+depends=('gtk3' 'nss' 'alsa-lib' 'libxss' 'libxtst' 'xdg-utils' 'libdrm' 'mesa' 'glibc' 'nspr' 'at-spi2-core')
 source=(
   "Antigravity.tar.gz::https://edgedl.me.gvt1.com/edgedl/release2/j0qc3/antigravity/stable/${pkgver}-6251250307170304/linux-x64/Antigravity.tar.gz"
   "antigravity.png"
@@ -20,28 +15,30 @@ sha256sums=('SKIP' 'SKIP')
 package() {
   cd "$srcdir/Antigravity"
 
-  # Install the application into /opt
   install -d "$pkgdir/opt/antigravity"
-  cp -r ./* "$pkgdir/opt/antigravity"
+  cp -a ./* "$pkgdir/opt/antigravity/"
 
-  # Chromium sandbox needs correct permissions
-  chmod 4755 "$pkgdir/opt/antigravity/chrome-sandbox"
+  # Chromium sandbox permissions
+  if [[ -f "$pkgdir/opt/antigravity/chrome-sandbox" ]]; then
+    chmod 4755 "$pkgdir/opt/antigravity/chrome-sandbox"
+  fi
 
-  # Symlink launcher
+  # Symlink binary (adjust if wrong)
   install -d "$pkgdir/usr/bin"
-  ln -s /opt/antigravity/bin/antigravity "$pkgdir/usr/bin/antigravity"
+  ln -s /opt/antigravity/Antigravity "$pkgdir/usr/bin/antigravity"
 
-  # Install custom icon
+  # Icon
   install -Dm644 "$srcdir/antigravity.png" "$pkgdir/usr/share/pixmaps/antigravity.png"
 
   # Desktop entry
   install -d "$pkgdir/usr/share/applications"
-  cat > "$pkgdir/usr/share/applications/antigravity.desktop" << 'EOF'
+  cat > "$pkgdir/usr/share/applications/antigravity.desktop" <<EOF
 [Desktop Entry]
 Type=Application
 Name=Antigravity
 Exec=antigravity
 Icon=antigravity
-Categories=Network;WebBrowser;
+Categories=Development;IDE;
+StartupWMClass=Antigravity
 EOF
 }
