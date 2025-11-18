@@ -1,7 +1,7 @@
 pkgname=antigravity
 pkgver=1.11.2
 pkgrel=1
-pkgdesc="Antigravity"
+pkgdesc="Google Antigravity is an agentic development platform, evolving the IDE into the agent-first era."
 arch=('x86_64')
 url="https://antigravity.google/"
 license=('custom')
