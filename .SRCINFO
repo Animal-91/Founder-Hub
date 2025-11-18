@@ -1,0 +1,23 @@
+pkgbase = antigravity
+	pkgdesc = Antigravity
+	pkgver = 1.11.2
+	pkgrel = 1
+	url = https://antigravity.google/
+	arch = x86_64
+	license = custom
+	depends = gtk3
+	depends = nss
+	depends = alsa-lib
+	depends = libxss
+	depends = libxtst
+	depends = xdg-utils
+	depends = libdrm
+	depends = mesa
+	provides = antigravity
+	conflicts = antigravity
+	source = Antigravity.tar.gz::https://edgedl.me.gvt1.com/edgedl/release2/j0qc3/antigravity/stable/1.11.2-6251250307170304/linux-x64/Antigravity.tar.gz
+	source = antigravity.png
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = antigravity
