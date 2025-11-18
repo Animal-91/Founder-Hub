@@ -10,7 +10,8 @@ source=(
   "Antigravity.tar.gz::https://edgedl.me.gvt1.com/edgedl/release2/j0qc3/antigravity/stable/${pkgver}-6251250307170304/linux-x64/Antigravity.tar.gz"
   "antigravity.png"
 )
-sha256sums=('SKIP' 'SKIP')
+sha256sums=('d1b1115ae76c275c376ea660e1e4d2dc20eb3e72d6a206b096505b944a5f64b7'
+            'ba0688b8ead9daf9609110ed782b9c47f3c57be74e9c276ec2b49e411dd4020b')
 
 package() {
   cd "$srcdir/Antigravity"
