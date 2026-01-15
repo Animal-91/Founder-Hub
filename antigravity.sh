@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-exec @ELECTRON@ /usr/lib/antigravity/ "$@"
+exec @ELECTRON@ --app=/usr/lib/antigravity/ "$@"

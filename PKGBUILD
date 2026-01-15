@@ -2,7 +2,7 @@
 
 pkgname=antigravity
 pkgver=1.14.2
-pkgrel=1
+pkgrel=2
 pkgdesc='An agentic development platform from Google, evolving the IDE into the agent-first era.'
 arch=(aarch64 x86_64)
 url='https://antigravity.google/'
@@ -14,10 +14,10 @@ options=(!strip !debug)
 source=($pkgname.sh)
 source_aarch64=("Antigravity-$pkgver-aarch64.deb::https://us-central1-apt.pkg.dev/projects/$pkgname-auto-updater-dev/pool/$pkgname-debian/${pkgname}_$pkgver-1768287742_arm64_fa871f81c5b4e1b343589341d279a64c.deb")
 source_x86_64=("Antigravity-$pkgver-x86_64.deb::https://us-central1-apt.pkg.dev/projects/$pkgname-auto-updater-dev/pool/$pkgname-debian/${pkgname}_$pkgver-1768287740_amd64_5527204873323b09e7e6bc003cf22f91.deb")
-sha256sums=('560fe34192560e90e1d9706d2e6610ccddc686c2ad14e3dce48af810ff1efa7c')
+sha256sums=('e4929190060cb15943f2197bdbd39b84de0b72c6066fac6eccb2db540dccc49e')
 sha256sums_aarch64=('75f25a8db8e656b78a780e6a95ed5f6d11ed32461c324d6a7e8abe847b9af5ab')
 sha256sums_x86_64=('770f440b025afba6d140a0791e91f16e957456f501c766948710c939eff09206')
-b2sums=('b58d39bb6c653bce108e3b0c0ebef594449debb7193f2a7a9fae5bdb89f94951481d37b4e0978a1012309e972352ca1e7de37ed72d92bdc58be00c17be5fc205')
+b2sums=('282a8029e345245cafb06a2859188edaa3e2b11ac1f2b7472e36dbb2fa9b9393faf008b290a715ec59754ecf3bc4ce7cb8bf252c7bdc0f1e02cd3ab25b90a073')
 b2sums_aarch64=('ac6d9af6731dc0a25c12190ac9a8ac8f963848e60f1053051b58246454b574545b7a38f9cbbbde9104facbe5fc500a8560a79a0a6ca04dfff3a8c34df5696c42')
 b2sums_x86_64=('c4e369acc4391879214e51fd782a71ec8ab88fc90c90d2ed8b5a4964af6f8f2485187c1e8e160b26919ebc700d1f2cc94f38dbcee71c7ec4cf679bfb5196f524')
 
