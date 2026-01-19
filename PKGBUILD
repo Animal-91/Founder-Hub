@@ -24,7 +24,7 @@ b2sums_x86_64=('c4e369acc4391879214e51fd782a71ec8ab88fc90c90d2ed8b5a4964af6f8f24
 prepare() {
     tar -xpf data.tar.xz
 
-    # Find out which major release of electron this version of proton-mail requires
+    # Find out which major release of electron this version of antigravity requires
     local _electron_major=$(jq --raw-output '.devDependencies.electron' < "usr/share/antigravity/resources/app/package.json" | sed 's/^[~^]\?\([0-9]\+\)\(\.[0-9]\+\)*$/\1/')
 
     # Check if we depend on the correct electron version
