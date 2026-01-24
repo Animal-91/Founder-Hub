@@ -1,6 +1,6 @@
 pkgbase = antigravity
 	pkgdesc = An agentic development platform from Google, evolving the IDE into the agent-first era.
-	pkgver = 1.15.6
+	pkgver = 1.15.8
 	pkgrel = 1
 	url = https://antigravity.google/
 	arch = aarch64
@@ -16,11 +16,11 @@ pkgbase = antigravity
 	source = antigravity.sh
 	sha256sums = e4929190060cb15943f2197bdbd39b84de0b72c6066fac6eccb2db540dccc49e
 	b2sums = 282a8029e345245cafb06a2859188edaa3e2b11ac1f2b7472e36dbb2fa9b9393faf008b290a715ec59754ecf3bc4ce7cb8bf252c7bdc0f1e02cd3ab25b90a073
-	source_aarch64 = Antigravity-1.15.6-aarch64.deb::https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/pool/antigravity-debian/antigravity_1.15.6-1769062965_arm64_774aef8f6baa03ac117434eb02556dc1.deb
-	sha256sums_aarch64 = d0ed138911be4de7d4b70b24d99f4715556b487309c5afc36343f74b2cd3777f
-	b2sums_aarch64 = 3714a0d3bfc2e69abce61f7e384fee1b450ea1b5339845c6371d5c37fdc05b3fc53dabcefb86908dd46e60c4ef674bdab3b995e803f59f744f859ee36d8050fb
-	source_x86_64 = Antigravity-1.15.6-x86_64.deb::https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/pool/antigravity-debian/antigravity_1.15.6-1769062947_amd64_b833027f41b5be32e185fc99f013e972.deb
-	sha256sums_x86_64 = 66ebe19546458e462d2c607222b16316f268dbaf47e64800433940c33e55e0ec
-	b2sums_x86_64 = 43fce6cf23d6df4fbc799bf1f34472d41b2857a257beaa2aaf27d5d6840252ca4778a15a048212f849acc55591348f91843bd30932a67231b9465755ccb45205
+	source_aarch64 = Antigravity-1.15.8-aarch64.deb::https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/pool/antigravity-debian/antigravity_1.15.8-1769232817_arm64_fbf15ca5a8ac03ab24a27c5d7a9fe562.deb
+	sha256sums_aarch64 = 2867139138d348383dc30ac9f4b08d3aec020e80a3c630ec484528eac6daf65b
+	b2sums_aarch64 = 7bdb62338892811b53b1d7d49ff78d8ba00dabaab7017681ccdacb33d8f42d22b25b4739743a579a111c30e7a6ff9ecce19013c99a1559bd579220813bfbc878
+	source_x86_64 = Antigravity-1.15.8-x86_64.deb::https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/pool/antigravity-debian/antigravity_1.15.8-1769233008_amd64_7d1cef02620eccedced833093ea2a457.deb
+	sha256sums_x86_64 = ed945d62dffe5a1a58fcf03a3f9f6967e20970c1ee431bba5ac617fa5f5cf6ed
+	b2sums_x86_64 = cdc4db08e1e9fbadeade97169236a9d1d2911b567c7d535f4de4d5bc0efcde3f1d10ab89ca141a1d96b28c2452cb35ce2a648491232aabd1d75fbdc1facf7c77
 
 pkgname = antigravity
