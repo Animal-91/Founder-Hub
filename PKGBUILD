@@ -2,11 +2,11 @@
 # Maintainer: HurricanePootis <hurricanepootis@protonmail.com>
 
 pkgname=antigravity
-pkgver=1.16.5
-_x86minor=1770081357
-_arm64minor=1770081396
-_x86check=1e91c55b802c42d27f931c53e68fc2ab
-_arm64check=c50fd2a09a9c4bc5a4ef2c96ff8b8d0b
+pkgver=1.18.3
+_x86minor=1771473975
+_arm64minor=1771473972
+_x86check=bec6f978ba7532ab369d8234b1e87c15
+_arm64check=e3aeb7e3102cfe6a48cbe4db6ba7e60b
 pkgrel=1
 pkgdesc='An agentic development platform from Google, evolving the IDE into the agent-first era.'
 arch=(aarch64 x86_64)
@@ -20,8 +20,8 @@ source=($pkgname.sh)
 source_aarch64=("Antigravity-$pkgver-aarch64.deb::https://us-central1-apt.pkg.dev/projects/$pkgname-auto-updater-dev/pool/$pkgname-debian/${pkgname}_$pkgver-${_arm64minor}_arm64_${_arm64check}.deb")
 source_x86_64=("Antigravity-$pkgver-x86_64.deb::https://us-central1-apt.pkg.dev/projects/$pkgname-auto-updater-dev/pool/$pkgname-debian/${pkgname}_$pkgver-${_x86minor}_amd64_${_x86check}.deb")
 sha256sums=('06a7836147fdb3006d469c880d4243c9b0bb0f691bc4d8c9a19829e722ed98ee')
-sha256sums_aarch64=('78eab59b17e619af06cf7adcd539165994940444c24705c2b0886cbade31a2e1')
-sha256sums_x86_64=('412b197ab4c417eb0144ebb6877794937e4d484659f348f19aa262c9c12c796c')
+sha256sums_aarch64=('f6a0c08b76a9b023e22aecffe75d82da00387f6275f870b221ade218b5568e81')
+sha256sums_x86_64=('83178eda0b2b5703a23a2d4488c24e56a99429b7dd7e3e9e409f226f80fc4c04')
 
 prepare() {
     tar -xpf data.tar.xz
