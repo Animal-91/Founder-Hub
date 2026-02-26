@@ -17,7 +17,7 @@ done
 
 # don't edit the electron binary name here! simply change the variable in the PKGBUILD and we will sed it into the correct one :)
 name=@ELECTRON@
-flags_file="${XDG_CONFIG_HOME:-$HOME/.config}/@ELECTRON@-flags.conf"
+flags_file="${XDG_CONFIG_HOME:-$HOME/.config}/${name}-flags.conf"
 fallback_file="${XDG_CONFIG_HOME:-$HOME/.config}/electron-flags.conf"
 
 lines=()
@@ -34,4 +34,4 @@ for line in "${lines[@]}"; do
     fi
 done
 
-ELECTRON_RUN_AS_NODE=1 exec /usr/lib/@ELECTRON@/electron /usr/lib/antigravity/out/cli.js "${electronflags[@]}" --app=/usr/lib/antigravity/ "${antigravityflags[@]}" "$@"
+ELECTRON_RUN_AS_NODE=1 exec /usr/lib/${name}/electron /usr/lib/antigravity/out/cli.js "${electronflags[@]}" --app=/usr/lib/antigravity/ "${antigravityflags[@]}" "$@"
