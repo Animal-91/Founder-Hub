@@ -9,9 +9,7 @@ arch=(aarch64 x86_64)
 url='https://antigravity.google/'
 license=(LicenseRef-Google-Antigravity)
 depends=(alsa-lib
-         at-spi2-atk
          at-spi2-core
-         atk
          bash
          cairo
          curl
