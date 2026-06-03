@@ -1,7 +1,7 @@
 # Maintainer: AlphaLynx <alphalynx at alphalynx dot dev>
 
 pkgname=antigravity
-pkgver=2.0.10
+pkgver=2.0.11
 pkgrel=1
 pkgdesc='Google Antigravity 2.0 multi-agent orchestration platform'
 arch=(aarch64 x86_64)
@@ -33,13 +33,13 @@ depends=(alsa-lib
 options=(!strip !debug)
 source=(antigravity.desktop
         antigravity.png)
-_build=5119448496078848
+_build=5731625217163264
 source_x86_64=(Antigravity-$pkgver-x86_64.tar.gz::https://storage.googleapis.com/antigravity-public/antigravity-hub/$pkgver-$_build/linux-x64/Antigravity.tar.gz)
 source_aarch64=(Antigravity-$pkgver-aarch64.tar.gz::https://storage.googleapis.com/antigravity-public/antigravity-hub/$pkgver-$_build/linux-arm/Antigravity.tar.gz)
 b2sums=('ec2c74f0e6f2458f2ef1c67b1321c058a3f7c422e364d8871a0a933220ec52ee5736e449cb797b6f135cff1f4adfe6f81e0fdbc76d3ec67c245aea002b8577d8'
         '772849ebf4574dccc7d2fc30751baed10b4a5d4091c524f3d69938192387693501c0c54ea5b43fa2ed382f70ecdff369a4c65ce3d0f778c68712fa0c2b5e84b8')
-b2sums_aarch64=('7a716f00a2968f16a765c79440dab324b8c2538d747b54c1cb8f89ddbc928bbe7a57c30f46d673c5e88c11967051fc95884e6152e9ec67157de0dc29e40d6e47')
-b2sums_x86_64=('7b08c4248a2a34fa77eb20f55a205e9c48b15a2a4b942f64fe028f47cfdfa333d6a046e17ba8a9b7edeaaa20a40f645ed235cabb9c07c1a3835587db8319b45b')
+b2sums_aarch64=('b4b0af84923efb84c29f38844b71ddd94d92d5616cb36957f8b41d4944621345c4a947f8229c761eb3aeffb02e5b6d8827ffc9a00d9e15fe263810251127cbf5')
+b2sums_x86_64=('fd29072beb89087b0a889868994cb1fe9e524a40f759a87bec99e744851f693c2dd4f3e1194778439cd12acb8e5bfc8588b2f36eb46f279d1fe036d22abe56c8')
 
 package() {
     install -d "$pkgdir/opt"
