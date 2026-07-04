@@ -7,6 +7,7 @@ create table profiles (
   website_url text,
   twitter_handle text,
   facebook_page_url text,
+  city text,
   is_pro boolean default false,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );

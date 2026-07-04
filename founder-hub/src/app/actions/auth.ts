@@ -94,6 +94,7 @@ export async function updateProfile(formData: FormData) {
     business_name: formData.get('business_name') as string,
     description: formData.get('description') as string,
     tag: formData.get('tag') as string,
+    city: formData.get('city') as string,
     website_url: formData.get('website_url') as string,
     twitter_handle: formData.get('twitter_handle') as string,
     facebook_page_url: formData.get('facebook_page_url') as string,

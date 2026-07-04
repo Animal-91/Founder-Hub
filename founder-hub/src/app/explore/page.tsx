@@ -2,9 +2,9 @@ import { createClient } from '@/utils/supabase/server';
 import SearchInput from '@/components/SearchInput';
 import CategoryFilter from '@/components/CategoryFilter';
 
-export default async function Explore({ searchParams }: { searchParams: Promise<{ q?: string, category?: string }> }) {
+export default async function Explore({ searchParams }: { searchParams: Promise<{ q?: string, category?: string, loc?: string }> }) {
   const supabase = await createClient();
-  const { q, category } = await searchParams;
+  const { q, category, loc } = await searchParams;
 
   let query = supabase.from('profiles').select('*').order('is_pro', { ascending: false });
   
@@ -14,6 +14,10 @@ export default async function Explore({ searchParams }: { searchParams: Promise<
 
   if (q) {
     query = query.or(`business_name.ilike.%${q}%,description.ilike.%${q}%,tag.ilike.%${q}%`);
+  }
+
+  if (loc) {
+    query = query.ilike('city', `%${loc}%`);
   }
 
   const { data: profiles, error } = await query;
@@ -61,7 +65,10 @@ export default async function Explore({ searchParams }: { searchParams: Promise<
                 </div>
                 <div>
                   <h3 className="card-title">{biz.business_name}</h3>
-                  <span className="card-tag">{biz.tag || 'Business'}</span>
+                  <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <span className="card-tag">{biz.tag || 'Business'}</span>
+                    {biz.city && <span style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>📍 {biz.city}</span>}
+                  </div>
                 </div>
               </div>
               <p className="card-desc">{biz.description}</p>

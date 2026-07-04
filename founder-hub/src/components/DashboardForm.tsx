@@ -137,9 +137,15 @@ export default function DashboardForm({ profile }: { profile: any }) {
           <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Business Name</label>
           <input name="business_name" type="text" defaultValue={profile.business_name} required style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
         </div>
-        <div>
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Category / Tag</label>
-          <input name="tag" type="text" defaultValue={profile.tag || ''} placeholder="e.g. SaaS, Marketing" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Category / Tag</label>
+            <input name="tag" type="text" defaultValue={profile.tag || ''} placeholder="e.g. SaaS" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>City / Location</label>
+            <input name="city" type="text" defaultValue={profile.city || ''} placeholder="e.g. Austin, TX" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
+          </div>
         </div>
       </div>
 
