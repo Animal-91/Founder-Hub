@@ -115,7 +115,7 @@ export default function DashboardForm({ profile }: { profile: any }) {
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem', backgroundColor: 'var(--card-bg)', padding: '2rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
       
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+      <div className="responsive-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
         <div>
           <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Logo</label>
           <input type="hidden" name="logo_url" value={profile.logo_url || ''} />
@@ -132,7 +132,7 @@ export default function DashboardForm({ profile }: { profile: any }) {
 
       <hr style={{ border: 'none', borderTop: '1px solid var(--border)' }} />
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+      <div className="responsive-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
         <div>
           <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Business Name</label>
           <input name="business_name" type="text" defaultValue={profile.business_name} required style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
@@ -148,15 +148,26 @@ export default function DashboardForm({ profile }: { profile: any }) {
         <textarea name="description" defaultValue={profile.description || ''} required style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', minHeight: '100px', outline: 'none', resize: 'vertical' }}></textarea>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+      <div className="responsive-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
         <div>
           <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Website URL</label>
           <input name="website_url" type="url" defaultValue={profile.website_url || ''} placeholder="https://..." style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
         </div>
         <div>
           <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Twitter / X Handle</label>
-          <input name="twitter_handle" type="text" defaultValue={profile.twitter_handle || ''} placeholder="@founderhub" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
+          <input name="twitter_handle" type="text" defaultValue={profile.twitter_handle || ''} placeholder="@localyze" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
         </div>
+      </div>
+
+      <div>
+        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Facebook Page URL</label>
+        <input name="facebook_page_url" type="url" defaultValue={profile.facebook_page_url || ''} placeholder="https://facebook.com/yourpage" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
+      </div>
+
+      <div>
+        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Google Place ID (Pro Members)</label>
+        <input name="google_place_id" type="text" defaultValue={profile.google_place_id || ''} placeholder="e.g. ChIJN1t_tDeuEmsRUsoyG83frY4" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
+        <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginTop: '0.5rem' }}>Find your Place ID <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none' }}>here</a>. This allows us to fetch and display your Google Reviews on your profile.</p>
       </div>
 
       <hr style={{ border: 'none', borderTop: '1px solid var(--border)' }} />
@@ -172,15 +183,15 @@ export default function DashboardForm({ profile }: { profile: any }) {
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {services.map((svc) => (
-              <div key={svc.id} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr auto', gap: '1rem', alignItems: 'start', backgroundColor: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '8px' }}>
-                <div>
+              <div key={svc.id} className="responsive-service-item" style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', backgroundColor: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '8px' }}>
+                <div style={{ flex: 2, width: '100%' }}>
                   <input type="text" placeholder="Service Name (e.g. Marketing Audit)" value={svc.name} onChange={(e) => updateService(svc.id, 'name', e.target.value)} style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', marginBottom: '0.5rem', outline: 'none' }} required />
                   <textarea placeholder="Description of service..." value={svc.description} onChange={(e) => updateService(svc.id, 'description', e.target.value)} style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', minHeight: '60px', outline: 'none', resize: 'vertical' }}></textarea>
                 </div>
-                <div>
+                <div style={{ flex: 1, width: '100%' }}>
                   <input type="text" placeholder="Price (e.g. $500)" value={svc.price} onChange={(e) => updateService(svc.id, 'price', e.target.value)} style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} required />
                 </div>
-                <button type="button" onClick={() => removeService(svc.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '1.25rem', padding: '0.25rem' }}>&times;</button>
+                <button type="button" onClick={() => removeService(svc.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '1.25rem', padding: '0.25rem', alignSelf: 'center' }}>&times;</button>
               </div>
             ))}
           </div>
@@ -204,7 +215,7 @@ export default function DashboardForm({ profile }: { profile: any }) {
         />
 
         {portfolio.length > 0 && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '1rem' }}>
+          <div className="responsive-portfolio-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '1rem' }}>
             {portfolio.map((url, i) => (
               <div key={i} style={{ position: 'relative', width: '100%', paddingTop: '100%', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)', backgroundColor: 'var(--background)' }}>
                 <img src={url} alt={`Portfolio ${i}`} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }} />

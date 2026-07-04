@@ -15,6 +15,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'You must be logged in to upgrade.' }, { status: 401 });
     }
 
+    const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
@@ -34,8 +36,8 @@ export async function POST(req: Request) {
         },
       ],
       mode: 'subscription',
-      success_url: `http://localhost:3000/explore?upgrade=success`,
-      cancel_url: `http://localhost:3000/pricing?upgrade=canceled`,
+      success_url: `${origin}/explore?upgrade=success`,
+      cancel_url: `${origin}/pricing?upgrade=canceled`,
       client_reference_id: user.id,
       metadata: {
         userId: user.id,

@@ -13,7 +13,7 @@ export default async function Home() {
   return (
     <div className="container">
       <section className="hero">
-        <h1>Where Founders Launch and Scale</h1>
+        <h1>Where Local Businesses Connect and Scale</h1>
         <p>Join the premier network for entrepreneurs to showcase their businesses, discover new tools, and connect with like-minded creators.</p>
         <div className="hero-actions">
           <a href="/signup" className="btn btn-primary">Create Profile</a>

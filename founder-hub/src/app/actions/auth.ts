@@ -55,6 +55,26 @@ export async function signup(formData: FormData) {
   redirect('/explore')
 }
 
+export async function signInWithFacebook() {
+  const supabase = await createClient()
+  const origin = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'facebook',
+    options: {
+      redirectTo: `${origin}/auth/callback`,
+    },
+  })
+
+  if (error) {
+    redirect('/login?error=Could not authenticate with Facebook')
+  }
+
+  if (data.url) {
+    redirect(data.url)
+  }
+}
+
 export async function logout() {
   const supabase = await createClient()
   await supabase.auth.signOut()
@@ -70,12 +90,14 @@ export async function updateProfile(formData: FormData) {
     redirect('/login')
   }
 
-  const updates = {
+    const updates = {
     business_name: formData.get('business_name') as string,
     description: formData.get('description') as string,
     tag: formData.get('tag') as string,
     website_url: formData.get('website_url') as string,
     twitter_handle: formData.get('twitter_handle') as string,
+    facebook_page_url: formData.get('facebook_page_url') as string,
+    google_place_id: formData.get('google_place_id') as string,
     logo_url: formData.get('logo_url') as string,
     cover_url: formData.get('cover_url') as string,
     services: JSON.parse((formData.get('services') as string) || '[]'),
@@ -88,3 +110,5 @@ export async function updateProfile(formData: FormData) {
   revalidatePath('/explore')
   revalidatePath(`/profile/${user.id}`)
 }
+
+

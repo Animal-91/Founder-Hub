@@ -13,11 +13,18 @@ export default function SearchInput() {
     const val = e.target.value;
     setQuery(val);
     startTransition(() => {
+      const params = new URLSearchParams();
+      const currentCategory = searchParams.get('category');
+      
       if (val) {
-        router.push(`/explore?q=${encodeURIComponent(val)}`);
-      } else {
-        router.push('/explore');
+        params.set('q', val);
       }
+      if (currentCategory && currentCategory !== 'All') {
+        params.set('category', currentCategory);
+      }
+      
+      const newQueryString = params.toString();
+      router.push(`/explore${newQueryString ? '?' + newQueryString : ''}`);
     });
   };
 
