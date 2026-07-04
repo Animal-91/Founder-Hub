@@ -56,10 +56,10 @@ export default function Pricing() {
 
           {/* Pro Plan */}
           <div className="card" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', padding: '2.5rem', borderColor: 'var(--primary)', position: 'relative', zIndex: 1, boxShadow: '0 10px 30px -10px rgba(59, 130, 246, 0.3)' }}>
-            <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', backgroundColor: 'var(--primary)', color: 'white', padding: '4px 16px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold' }}>RECOMMENDED</div>
+            <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', backgroundColor: 'var(--primary)', color: 'white', padding: '4px 16px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap' }}>EARLY ADOPTER PRICING</div>
             <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Pro Founder</h3>
             <div style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '0.5rem' }}>$9<span style={{ fontSize: '1rem', color: 'var(--muted)', fontWeight: 400 }}>/month</span></div>
-            <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>Stand out from the crowd and attract more customers.</p>
+            <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>Lock in this recurring rate forever. Stand out from the crowd and attract more customers.</p>
             
             <ul style={{ listStyle: 'none', marginBottom: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
