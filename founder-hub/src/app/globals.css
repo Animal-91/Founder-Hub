@@ -1,4 +1,14 @@
 :root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --card-bg: #f8fafc;
+  --border: #e2e8f0;
+  --muted: #64748b;
+}
+
+.dark {
   --background: #0f1115;
   --foreground: #f8fafc;
   --primary: #3b82f6;
