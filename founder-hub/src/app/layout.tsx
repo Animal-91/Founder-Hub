@@ -7,6 +7,7 @@ import { createClient } from '@/utils/supabase/server';
 import { logout } from '@/app/actions/auth';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import ThemeToggle from '@/components/ThemeToggle';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -96,6 +97,7 @@ export default async function RootLayout({
               {children}
             </main>
           </div>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
