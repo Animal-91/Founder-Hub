@@ -1,14 +1,19 @@
 import { createClient } from '@/utils/supabase/server';
 import SearchInput from '@/components/SearchInput';
+import CategoryFilter from '@/components/CategoryFilter';
 
-export default async function Explore({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+export default async function Explore({ searchParams }: { searchParams: Promise<{ q?: string, category?: string }> }) {
   const supabase = await createClient();
-  const { q } = await searchParams;
+  const { q, category } = await searchParams;
 
   let query = supabase.from('profiles').select('*').order('is_pro', { ascending: false });
   
+  if (category) {
+    query = query.eq('tag', category);
+  }
+
   if (q) {
-    query = query.ilike('business_name', `%${q}%`);
+    query = query.or(`business_name.ilike.%${q}%,description.ilike.%${q}%,tag.ilike.%${q}%`);
   }
 
   const { data: profiles, error } = await query;
@@ -18,13 +23,15 @@ export default async function Explore({ searchParams }: { searchParams: Promise<
   return (
     <div className="container">
       <div style={{ padding: '3rem 0' }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: 700 }}>Explore Startups</h1>
-        <p style={{ color: 'var(--muted)', fontSize: '1.1rem', marginBottom: '2rem' }}>Discover innovative products and tools built by top entrepreneurs.</p>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: 700 }}>Explore Local Businesses</h1>
+        <p style={{ color: 'var(--muted)', fontSize: '1.1rem', marginBottom: '2rem' }}>Discover innovative products, trusted services, and tools built by top entrepreneurs.</p>
         
-        <div style={{ display: 'flex', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
           <SearchInput />
-          <a href="/explore" className="btn btn-secondary">Clear Filter</a>
+          <a href="/explore" className="btn btn-secondary" style={{ padding: '0.75rem 1.5rem' }}>Clear All</a>
         </div>
+        
+        <CategoryFilter />
 
         <div className="grid">
           {businesses.map((biz: any) => (

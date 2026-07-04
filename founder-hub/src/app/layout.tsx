@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
@@ -8,8 +9,21 @@ import { logout } from '@/app/actions/auth';
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "FounderHub | Discover & Grow",
+  title: "Localyze | Discover & Grow",
   description: "The passive entrepreneur platform to share businesses and advertise.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Localyze",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0f1115",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default async function RootLayout({
@@ -23,11 +37,35 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
+        <Script id="sw-register" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    for(let registration of registrations) {
+                      registration.unregister();
+                    }
+                  });
+                } else {
+                  navigator.serviceWorker.register('/sw.js').then(
+                    function(registration) {
+                      console.log('ServiceWorker registration successful');
+                    },
+                    function(err) {
+                      console.log('ServiceWorker registration failed: ', err);
+                    }
+                  );
+                }
+              });
+            }
+          `}
+        </Script>
         <div className="main-content">
           <nav style={{ padding: '1.5rem 0', borderBottom: '1px solid var(--border)', backgroundColor: 'var(--background)' }}>
             <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <Link href="/" style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--foreground)', textDecoration: 'none' }}>
-                FounderHub
+                Localyze
               </Link>
               <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
                 <Link href="/explore" style={{ color: 'var(--muted)', textDecoration: 'none', fontSize: '0.95rem' }}>Explore</Link>
