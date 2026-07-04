@@ -77,6 +77,11 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem', flexWrap: 'wrap', justifyContent: 'inherit' }}>
                 <h1 style={{ fontSize: '2.5rem', margin: 0, lineHeight: 1.2, wordBreak: 'break-word' }}>{profile.business_name}</h1>
                 <span className="card-tag" style={{ fontSize: '1rem' }}>{profile.tag || 'Business'}</span>
+                {profile.city && (
+                  <span style={{ fontSize: '1rem', color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                    📍 {profile.city}
+                  </span>
+                )}
                 {profile.is_pro && (
                   <span style={{ backgroundColor: 'var(--primary)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 'bold' }}>Promoted</span>
                 )}
