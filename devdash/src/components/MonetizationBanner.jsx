@@ -10,7 +10,7 @@ export default function MonetizationBanner() {
   const AFFILIATE_LINK = "https://m.do.co/c/YOUR_REFERRAL_CODE"; 
   
   // 2. Your 'Buy Me A Coffee' or Ko-fi Link
-  const DONATION_LINK = "https://buymeacoffee.com/YOUR_USERNAME";
+  const DONATION_LINK = "https://buymeacoffee.com/devdash";
 
   // 3. Google AdSense Client ID (Looks like: ca-pub-1234567890123456)
   // Leave this blank to show the placeholder in development.
