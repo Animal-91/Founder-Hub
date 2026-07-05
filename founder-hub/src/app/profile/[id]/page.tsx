@@ -1,6 +1,31 @@
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
+import Script from 'next/script';
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const supabase = await createClient();
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('business_name, description, logo_url')
+    .eq('id', resolvedParams.id)
+    .single();
+
+  if (!profile) return { title: 'Not Found' };
+
+  return {
+    title: `${profile.business_name || 'Business Profile'} | Localyze`,
+    description: profile.description || `View ${profile.business_name} on Localyze.`,
+    openGraph: {
+      title: `${profile.business_name} | Localyze`,
+      description: profile.description || `View ${profile.business_name} on Localyze.`,
+      images: profile.logo_url ? [{ url: profile.logo_url }] : [],
+    }
+  };
+}
 
 export default async function ProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
@@ -35,6 +60,23 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
   return (
       <div style={{ maxWidth: '800px', margin: '0 auto', paddingBottom: '4rem' }}>
         
+        <Script id="schema-local-business" type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": profile.business_name,
+            "image": profile.logo_url ? [profile.logo_url] : [],
+            "description": profile.description,
+            "url": `https://localyzeyourbusiness.com/profile/${resolvedParams.id}`,
+            ...(profile.city ? {
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": profile.city,
+              }
+            } : {})
+          })}
+        </Script>
+
         {/* Cover Photo Area */}
         <div style={{ 
           height: '250px', 

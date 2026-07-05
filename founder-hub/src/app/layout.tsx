@@ -13,13 +13,27 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://localyzeyourbusiness.com"),
   title: "Localyze | Discover & Grow",
-  description: "The passive entrepreneur platform to share businesses and advertise.",
+  description: "The passive entrepreneur platform to share businesses, attract local customers, and grow your local presence.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Localyze",
+  },
+  openGraph: {
+    title: "Localyze",
+    description: "Discover local businesses and services. Grow your local presence with Localyze.",
+    url: "https://localyzeyourbusiness.com",
+    siteName: "Localyze",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Localyze",
+    description: "Discover local businesses and services. Grow your local presence with Localyze.",
   },
 };
 
