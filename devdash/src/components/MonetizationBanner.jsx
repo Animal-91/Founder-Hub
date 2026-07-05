@@ -51,9 +51,11 @@ export default function MonetizationBanner() {
           <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-secondary)' }}>If these free tools save you time, consider supporting the project!</p>
         </div>
         <div style={{ display: 'flex', gap: '12px' }}>
-          <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="glass-button secondary" style={{ textDecoration: 'none', fontSize: '13px', padding: '8px 16px' }}>
-            <ExternalLink size={16} /> Sponsored: Best VPS
-          </a>
+          {AFFILIATE_LINK !== "https://m.do.co/c/YOUR_REFERRAL_CODE" && (
+            <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="glass-button secondary" style={{ textDecoration: 'none', fontSize: '13px', padding: '8px 16px' }}>
+              <ExternalLink size={16} /> Sponsored: NordVPN
+            </a>
+          )}
           <a href={DONATION_LINK} target="_blank" rel="noopener noreferrer" className="glass-button" style={{ textDecoration: 'none', fontSize: '13px', padding: '8px 16px', background: '#FFDD00', color: '#000' }}>
             <Coffee size={16} /> Buy me a coffee
           </a>
