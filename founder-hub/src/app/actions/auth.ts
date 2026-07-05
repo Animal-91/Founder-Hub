@@ -101,6 +101,7 @@ export async function updateProfile(formData: FormData) {
     google_place_id: formData.get('google_place_id') as string,
     logo_url: formData.get('logo_url') as string,
     cover_url: formData.get('cover_url') as string,
+    background_image_url: formData.get('background_image_url') as string,
     theme_color: formData.get('theme_color') as string,
     youtube_video_id: formData.get('youtube_video_id') as string,
     services: JSON.parse((formData.get('services') as string) || '[]'),

@@ -58,11 +58,22 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
   }
 
   return (
+    <div style={{
+      minHeight: '100vh',
+      width: '100%',
+      backgroundImage: profile.background_image_url ? `url(${profile.background_image_url})` : 'none',
+      backgroundSize: 'cover',
+      backgroundAttachment: 'fixed',
+      backgroundPosition: 'center',
+      paddingBottom: '4rem',
+      ...(profile.theme_color ? { '--primary': profile.theme_color } as React.CSSProperties : {}) 
+    }}>
       <div style={{ 
         maxWidth: '800px', 
         margin: '0 auto', 
-        paddingBottom: '4rem',
-        ...(profile.theme_color ? { '--primary': profile.theme_color } as React.CSSProperties : {}) 
+        backgroundColor: 'var(--background)',
+        boxShadow: profile.background_image_url ? '0 0 40px rgba(0,0,0,0.5)' : 'none',
+        minHeight: '100vh'
       }}>
         
         <Script id="schema-local-business" type="application/ld+json">
@@ -318,5 +329,6 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
 
         </div>
       </div>
+    </div>
   );
 }

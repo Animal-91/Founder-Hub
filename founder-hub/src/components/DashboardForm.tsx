@@ -11,6 +11,7 @@ export default function DashboardForm({ profile }: { profile: any }) {
   const [loading, setLoading] = useState(false);
   const [logoPreview, setLogoPreview] = useState(profile.logo_url);
   const [coverPreview, setCoverPreview] = useState(profile.cover_url);
+  const [backgroundPreview, setBackgroundPreview] = useState(profile.background_image_url);
   const [youtubeInput, setYoutubeInput] = useState(profile.youtube_video_id ? `https://youtube.com/watch?v=${profile.youtube_video_id}` : '');
   const [themeColor, setThemeColor] = useState(profile.theme_color || '#2563eb');
 
@@ -23,6 +24,7 @@ export default function DashboardForm({ profile }: { profile: any }) {
 
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [coverFile, setCoverFile] = useState<File | null>(null);
+  const [backgroundFile, setBackgroundFile] = useState<File | null>(null);
 
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -35,6 +37,13 @@ export default function DashboardForm({ profile }: { profile: any }) {
     if (e.target.files && e.target.files[0]) {
       setCoverFile(e.target.files[0]);
       setCoverPreview(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
+  const handleBackgroundChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setBackgroundFile(e.target.files[0]);
+      setBackgroundPreview(URL.createObjectURL(e.target.files[0]));
     }
   };
 
@@ -72,6 +81,7 @@ export default function DashboardForm({ profile }: { profile: any }) {
     const formData = new FormData(e.currentTarget);
     let currentLogoUrl = profile.logo_url;
     let currentCoverUrl = profile.cover_url;
+    let currentBackgroundUrl = profile.background_image_url;
 
     if (logoFile) {
       const ext = logoFile.name.split('.').pop();
@@ -99,6 +109,19 @@ export default function DashboardForm({ profile }: { profile: any }) {
       }
     }
 
+    if (backgroundFile) {
+      const ext = backgroundFile.name.split('.').pop();
+      const filePath = `${profile.id}/background-${Date.now()}.${ext}`;
+      const { data, error } = await supabase.storage.from('business-images').upload(filePath, backgroundFile);
+      if (error) {
+        console.error("Background upload error:", error);
+        alert(`Background image upload failed: ${error.message}`);
+      }
+      if (data) {
+        currentBackgroundUrl = supabase.storage.from('business-images').getPublicUrl(filePath).data.publicUrl;
+      }
+    }
+
     // Parse YouTube URL to ID
     let youtubeVideoId = '';
     if (youtubeInput) {
@@ -118,6 +141,7 @@ export default function DashboardForm({ profile }: { profile: any }) {
 
     formData.set('logo_url', currentLogoUrl || '');
     formData.set('cover_url', currentCoverUrl || '');
+    formData.set('background_image_url', currentBackgroundUrl || '');
     formData.set('theme_color', themeColor);
     formData.set('youtube_video_id', youtubeVideoId);
     formData.set('services', JSON.stringify(services));
@@ -127,6 +151,7 @@ export default function DashboardForm({ profile }: { profile: any }) {
     // so Next.js doesn't try to parse them and throw a body size limit error!
     formData.delete('logo');
     formData.delete('cover');
+    formData.delete('background');
     
     await updateProfile(formData);
     setLoading(false);
@@ -201,8 +226,15 @@ export default function DashboardForm({ profile }: { profile: any }) {
 
       <div>
         <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Personalization (MySpace Vibes)</h3>
-        <p style={{ fontSize: '0.9rem', color: 'var(--muted)', marginBottom: '1.5rem' }}>Make your profile yours. Pick an accent color and embed a featured YouTube video or song!</p>
+        <p style={{ fontSize: '0.9rem', color: 'var(--muted)', marginBottom: '1.5rem' }}>Make your profile yours. Pick an accent color, upload a full page background, and embed a featured video!</p>
         
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Page Background Image</label>
+          <input type="hidden" name="background_image_url" value={profile.background_image_url || ''} />
+          {backgroundPreview && <img src={backgroundPreview} alt="Background Preview" style={{ width: '100%', height: '120px', borderRadius: '12px', objectFit: 'cover', marginBottom: '1rem', border: '1px solid var(--border)' }} />}
+          <input name="background" type="file" accept="image/*" onChange={handleBackgroundChange} style={{ width: '100%', color: 'var(--muted)', fontSize: '0.9rem' }} />
+        </div>
+
         <div className="responsive-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
           <div>
             <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Theme Color</label>
