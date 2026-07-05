@@ -1,6 +1,7 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import DashboardForm from '@/components/DashboardForm';
+import DeleteAccountButton from '@/components/DeleteAccountButton';
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -47,6 +48,8 @@ export default async function Dashboard() {
         </div>
 
         <DashboardForm profile={profile} />
+        
+        <DeleteAccountButton />
       </div>
     </div>
   );
