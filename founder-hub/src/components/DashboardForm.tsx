@@ -11,6 +11,8 @@ export default function DashboardForm({ profile }: { profile: any }) {
   const [loading, setLoading] = useState(false);
   const [logoPreview, setLogoPreview] = useState(profile.logo_url);
   const [coverPreview, setCoverPreview] = useState(profile.cover_url);
+  const [youtubeInput, setYoutubeInput] = useState(profile.youtube_video_id ? `https://youtube.com/watch?v=${profile.youtube_video_id}` : '');
+  const [themeColor, setThemeColor] = useState(profile.theme_color || '#2563eb');
 
   const addService = () => setServices([...services, { id: Date.now(), name: '', price: '', description: '' }]);
   const removeService = (id: number) => setServices(services.filter(s => s.id !== id));
@@ -97,8 +99,27 @@ export default function DashboardForm({ profile }: { profile: any }) {
       }
     }
 
+    // Parse YouTube URL to ID
+    let youtubeVideoId = '';
+    if (youtubeInput) {
+      try {
+        const url = new URL(youtubeInput);
+        if (url.hostname.includes('youtube.com')) {
+          youtubeVideoId = url.searchParams.get('v') || '';
+        } else if (url.hostname.includes('youtu.be')) {
+          youtubeVideoId = url.pathname.slice(1);
+        } else {
+          youtubeVideoId = youtubeInput; // assume they pasted just the ID
+        }
+      } catch (e) {
+        youtubeVideoId = youtubeInput; // fallback if it's not a full URL
+      }
+    }
+
     formData.set('logo_url', currentLogoUrl || '');
     formData.set('cover_url', currentCoverUrl || '');
+    formData.set('theme_color', themeColor);
+    formData.set('youtube_video_id', youtubeVideoId);
     formData.set('services', JSON.stringify(services));
     formData.set('portfolio', JSON.stringify(portfolio));
     
@@ -174,6 +195,38 @@ export default function DashboardForm({ profile }: { profile: any }) {
         <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Google Place ID (Pro Members)</label>
         <input name="google_place_id" type="text" defaultValue={profile.google_place_id || ''} placeholder="e.g. ChIJN1t_tDeuEmsRUsoyG83frY4" style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} />
         <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginTop: '0.5rem' }}>Find your Place ID <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none' }}>here</a>. This allows us to fetch and display your Google Reviews on your profile.</p>
+      </div>
+
+      <hr style={{ border: 'none', borderTop: '1px solid var(--border)' }} />
+
+      <div>
+        <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem' }}>Personalization (MySpace Vibes)</h3>
+        <p style={{ fontSize: '0.9rem', color: 'var(--muted)', marginBottom: '1.5rem' }}>Make your profile yours. Pick an accent color and embed a featured YouTube video or song!</p>
+        
+        <div className="responsive-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Theme Color</label>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <input 
+                type="color" 
+                value={themeColor} 
+                onChange={(e) => setThemeColor(e.target.value)} 
+                style={{ width: '50px', height: '50px', padding: 0, border: 'none', borderRadius: '8px', cursor: 'pointer', background: 'none' }} 
+              />
+              <span style={{ fontFamily: 'monospace', color: 'var(--foreground)' }}>{themeColor}</span>
+            </div>
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Featured YouTube Video URL</label>
+            <input 
+              type="text" 
+              value={youtubeInput} 
+              onChange={(e) => setYoutubeInput(e.target.value)} 
+              placeholder="https://www.youtube.com/watch?v=..." 
+              style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border)', backgroundColor: 'var(--background)', color: 'var(--foreground)', outline: 'none' }} 
+            />
+          </div>
+        </div>
       </div>
 
       <hr style={{ border: 'none', borderTop: '1px solid var(--border)' }} />

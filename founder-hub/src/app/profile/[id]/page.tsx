@@ -58,7 +58,12 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
   }
 
   return (
-      <div style={{ maxWidth: '800px', margin: '0 auto', paddingBottom: '4rem' }}>
+      <div style={{ 
+        maxWidth: '800px', 
+        margin: '0 auto', 
+        paddingBottom: '4rem',
+        ...(profile.theme_color ? { '--primary': profile.theme_color } as React.CSSProperties : {}) 
+      }}>
         
         <Script id="schema-local-business" type="application/ld+json">
           {JSON.stringify({
@@ -100,7 +105,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
               width: '120px', 
               height: '120px', 
               borderRadius: '20px', 
-              background: profile.logo_url ? `url(${profile.logo_url}) center/cover` : 'linear-gradient(135deg, #1e293b, #334155)', 
+              background: profile.logo_url ? `url(${profile.logo_url}) center/cover` : 'linear-gradient(135deg, var(--primary, #1e293b), #334155)', 
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center', 
@@ -152,6 +157,23 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
               <p style={{ color: 'var(--muted)', fontStyle: 'italic' }}>Links not provided yet.</p>
             )}
           </div>
+
+          {profile.youtube_video_id && (
+            <div style={{ marginBottom: '4rem' }}>
+              <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', color: 'var(--foreground)' }}>Featured Video</h2>
+              <div style={{ width: '100%', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.2)', backgroundColor: 'black', aspectRatio: '16/9' }}>
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src={`https://www.youtube.com/embed/${profile.youtube_video_id}?autoplay=1&mute=1`} 
+                  title="YouTube video player" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen>
+                </iframe>
+              </div>
+            </div>
+          )}
 
           <hr style={{ border: 'none', borderTop: '1px solid var(--border)', marginBottom: '3rem' }} />
 
